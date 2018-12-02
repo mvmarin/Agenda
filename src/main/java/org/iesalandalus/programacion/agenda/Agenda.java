@@ -5,6 +5,8 @@
  */
 package org.iesalandalus.programacion.agenda;
 
+import javax.naming.OperationNotSupportedException;
+
 /**
  *
  * @author victoriamarin
@@ -38,5 +40,41 @@ public class Agenda {
      */
     public int getNumContactos(){
         return numContactos;
+    }
+    /**
+     * Aparcao
+     * @param nuevoContacto 
+     */
+    public void añadir(Contacto nuevoContacto){   
+    }
+    /**
+     * Definimos el método buscarIndiceCliente, introduciendo un array para comparar la posición en la que está el cliente o -1 si no lo encuentra.
+     * @param nombreCliente
+     * @return 
+     */
+    private int buscarIndiceCliente(String nombreCliente){
+        if(nombreCliente !=null && !nombreCliente.isEmpty()){
+            for(int indice= 0; indice < numContactos; indice++){    
+                Contacto contactoTmp = contactos[indice];
+                if(nombreCliente.equals(contactoTmp.getNombre())){
+                    return indice;
+                }
+            }
+        }
+        return -1;
+    }   
+    /**
+     * Definimos el método buscar, donde recorremos por el arrays buscando el nombreCliente. En caso de no estar, devolvería la posición -1.
+     * @param nombreCliente
+     * @return 
+     * @throws javax.naming.OperationNotSupportedException 
+     */
+    public Contacto buscar(String nombreCliente) throws OperationNotSupportedException{
+        int posicion = buscarIndiceCliente(nombreCliente);
+        if(posicion == -1){
+            throw new OperationNotSupportedException("El nombre introducido no se encuentra en la Agenda");
+        }else{
+            return contactos[posicion];
+        }
     }
 }
