@@ -110,17 +110,22 @@ public class Agenda {
         if(!indiceNoSuperaTamano(contactoEliminado)){
             throw new OperationNotSupportedException("El contacto eliminado introducido no es correcto");
         }
+        int posicionBorrar = -1;
         for(int indice = contactoEliminado; indice < numContactos; indice++){
             int posicionSiguiente = indice+1;
             if(indiceNoSuperaTamano(posicionSiguiente)){
                if(contactos[posicionSiguiente] != null){
                   contactos[indice] = contactos[posicionSiguiente];
+                  posicionBorrar = posicionSiguiente;
                }else{
-                   return;
+                   break;
                }
             }else{
-                return;
+                break;
             }
+        }
+        if(posicionBorrar!=-1) {
+            contactos[posicionBorrar] = null;
         }
     }
     /**
