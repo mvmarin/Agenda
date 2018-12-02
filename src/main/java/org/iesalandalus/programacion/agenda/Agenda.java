@@ -18,6 +18,12 @@ public class Agenda {
     /**
      * Hemos añadido el atributo MAX_CONTACTO a la clase Agenda.
      */
-    private static final int MAX_CONTACTOS = 0;
+    private static final int MAX_CONTACTOS = 10;
+    
+    /**
+     * Definimos el array de Contactos
+     */
+    private Contacto contactos[];
+    
     
 }
