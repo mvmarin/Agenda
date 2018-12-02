@@ -25,5 +25,18 @@ public class Agenda {
      */
     private Contacto contactos[];
     
-    
+    /**
+     * Definimos el método get de Contactos llamando al array Contacto.
+     * @return 
+     */
+    public Contacto[] getContactos(){
+        return contactos;
+    }
+    /**
+     * Definimos el método get de numContactos.
+     * @return 
+     */
+    public int getNumContactos(){
+        return numContactos;
+    }
 }
