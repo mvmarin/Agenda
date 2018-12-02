@@ -56,7 +56,7 @@ public class Agenda {
         if(nombreCliente !=null && !nombreCliente.isEmpty()){
             for(int indice= 0; indice < numContactos; indice++){    
                 Contacto contactoTmp = contactos[indice];
-                if(nombreCliente.equals(contactoTmp.getNombre())){
+                if(nombreCliente.equalsIgnoreCase(contactoTmp.getNombre())){
                     return indice;
                 }
             }
@@ -76,5 +76,49 @@ public class Agenda {
         }else{
             return contactos[posicion];
         }
+    }
+    /**
+     * Definimos el método desplazarUnaPosicionHaciaLaIzquierda para comprobar que no supera el tamaño
+     * @param contactoEliminado 
+     */
+    private void desplazarUnaPosicionHaciaLaIzquierda(int contactoEliminado) throws OperationNotSupportedException{
+        if(!indiceNoSuperaTamano(contactoEliminado)){
+            throw new OperationNotSupportedException("El contacto eliminado introducido no es correcto");
+        }
+        for(int indice = contactoEliminado; indice < numContactos; indice++){
+            int posicionSiguiente = indice+1;
+            if(indiceNoSuperaTamano(posicionSiguiente)){
+               if(contactos[posicionSiguiente] != null){
+                  contactos[indice] = contactos[posicionSiguiente];
+               }else{
+                   return;
+               }
+            }else{
+                return;
+            }
+        }
+    }
+    /**
+     * Declaramos el método indice no supera el tamaño para indicar que si no supera el max_contactos entra por el bucle.
+     * @param indice
+     * @return 
+     */
+    private boolean indiceNoSuperaTamano(int indice){
+        if((indice < MAX_CONTACTOS) && (indice >= 0)){
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Definimos el método borrar, y llamamos al método deplazarUnaPosicionHaciaLaIzquierda.
+     * @param nombreBorrar 
+     */
+    public void borrar(String nombreBorrar) throws OperationNotSupportedException{
+        int posicion = buscarIndiceCliente(nombreBorrar);
+        if (posicion == -1){
+            throw new OperationNotSupportedException("No hay ningun contacto en la Agenda con ese nombre");
+        }
+        desplazarUnaPosicionHaciaLaIzquierda(posicion);
+        numContactos--;
     }
 }
