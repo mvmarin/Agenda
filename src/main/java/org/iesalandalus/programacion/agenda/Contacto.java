@@ -40,6 +40,17 @@ public class Contacto {
     private static final String ER_CORREO ="^[\\\\w-]+(\\\\.[\\\\w-]+)*@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$";
     
     /**
+     * Creamos el constructor Contacto, llamando a los tres métodos set.
+     * @param nombreValor
+     * @param telefonoValor
+     * @param correoValor 
+     */
+    public Contacto(String nombreValor, String telefonoValor, String correoValor){
+        setNombre(nombreValor);
+        setTelefono(telefonoValor);
+        setCorreo(correoValor);
+    }
+    /**
      * Definimos el método setNombre, introduciendo las excepciones en caso de estar vacio o modificar.
      * @param nombreValor 
      */
