@@ -70,6 +70,9 @@ public class Contacto {
      * @return 
      */
     public String getNombre(){
+      if(nombre==null) {
+          return "";
+      }
       return nombre;  
     }
     /**
@@ -97,6 +100,9 @@ public class Contacto {
      * @return 
      */
     public String getTelefono(){
+        if(telefono == null){
+            return "";
+        }
         return telefono;
     }
     /**
@@ -123,8 +129,64 @@ public class Contacto {
      * @return 
      */
     public String getCorreo(){
+        if(correo == null){
+            return "";
+        }
         return correo;
     }
+    /**
+     * Definimos el método get para obtener las iniciales de un nombre.
+     * @return 
+     */
+    private String getIniciales(){
+        if(nombre == null || nombre.isEmpty()){
+            return "";
+        }
+        String iniciales = "";
+        String palabras[] = nombre.split(" ");
+        for (int i = 0; i < palabras.length; i++) {
+            String palabra = palabras[i];
+            iniciales = iniciales + palabra.charAt(0);
+        }
+        return iniciales.toUpperCase();
+    }
+    /**
+     * Definimos el método toString para obtener las iniciales, el teléfono y el correo del contacto.
+     * @return 
+     */
+    @Override
+    public String toString(){
+        return "Las iniciales son : " + getIniciales() + "{"+getTelefono()+ "," +getCorreo()+"}";
+    }
+    /**
+     * Definimos el método equals para comparar dos objetos contacto.
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj){
+        if(obj instanceof Contacto){
+            Contacto tmp = (Contacto) obj;
+            if(nombre.equalsIgnoreCase(tmp.getNombre())){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    /**
+     * Definimos el método hashCode para generar el hashCode de la clase.
+     * @return 
+     */
+    public int hashCode(){
+        int prime = 31;
+        int result = 1;
+        result = prime * result + (((nombre == null) ? 0 : nombre.hashCode())
+                +((telefono == null) ? 0 : telefono.hashCode()))
+                +((correo == null) ? 0 : correo.hashCode());
+        return result;
+    }
+
 }
 
 
