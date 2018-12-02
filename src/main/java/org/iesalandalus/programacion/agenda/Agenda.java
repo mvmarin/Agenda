@@ -42,6 +42,31 @@ public class Agenda {
         return numContactos;
     }
     /**
+     * Comprobamos que el número de contactos actual no es igual al máximo para poder introducir uno nuevol se controlan las excepciones tanto de max contactos, repetición de contactp y contacto no válido
+     * @param nuevoContacto
+     * @return
+     * @throws OperationNotSupportedException 
+     */
+    private int buscarPrimerIndiceComprobandoExistencia(Contacto nuevoContacto) throws OperationNotSupportedException{
+        if(nuevoContacto != null){
+            if(numContactos == MAX_CONTACTOS){
+                throw new OperationNotSupportedException("La Agenda está completa");
+            }
+            for(int indice = 0; indice < numContactos; indice++){
+                
+                if(contactos[indice] == null){
+                    return indice;
+                }
+                if(contactos[indice].equals(nuevoContacto)){
+                    throw new OperationNotSupportedException("El contacto está repetido");
+                }
+            }
+        }else{
+            throw new OperationNotSupportedException("El nuevo contacto no es válido");
+        }
+        return -1;
+    }
+    /**
      * Aparcao
      * @param nuevoContacto 
      */
